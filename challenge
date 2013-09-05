@@ -1,0 +1,50 @@
+#!/bin/bash
+
+if [ $# -lt 2 ]; then
+    echo "Usage: $0 prog name"
+    echo " eg 1. {ruby fizz_buzz}"
+    echo " eg 2. {python all}"
+    exit
+fi
+
+ruby ./install/compile.rb
+cd $1-src
+
+function install {
+    echo $(type $1 2>/dev/null | grep -c 'is')
+}
+
+case "$1" in
+python) if [ $(install py.test) -eq 0 ]; then
+            if [ $(install pip) -eq 0 ]; then
+                /usr/lib/command-not-found pip
+                exit
+            else
+                sudo pip install pytest
+            fi
+        fi
+        export PYTHONDONTWRITEBYTECODE=1
+        file=$2
+        if [ $2 == "all" ]; then
+            file=`ls ../abstract`
+        fi
+        for func in $file; do
+            func=$(echo $func | cut -d'_' -f 1)
+            rule+="${func^} "
+        done
+        sed -i "s/=.*/=$rule/" pytest.ini
+        py.test -v spec.py
+        ;;
+ruby)   if [ $(install turn) -eq 0 ]; then
+            bundle install
+        fi
+        rule='\/'$(echo "$2" | sed 's/_/\\\\s/')'\/i'
+        if [ $2 == "all" ]; then
+            rule='nil'
+        fi
+        sed -i "0,/matchcase/{s/=.*/= $rule/}" spec.rb
+        turn spec.rb
+        ;;
+scala)  echo "Scala to be implemented.."
+        ;;
+esac

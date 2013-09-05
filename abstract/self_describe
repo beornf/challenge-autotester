@@ -1,0 +1,16 @@
+Self Describing Numbers:
+Write a program that prints self describing numbers up to N.
+A number is self-describing when the digit in each position
+m is is equal to the number of times that digits appears d.
+
+Example: Zero * 1 time, One * 2 times, Two * 1 time, Three * 0 times
+Input  : 1210
+Output : 1210
+
+Example: Self describing under one million
+Input  : 1000000
+Output : 1210 2020 21200
+
+Example: Self describing under four million
+Input  : 4000000
+Output : 1210 2020 21200 3211000

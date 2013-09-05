@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+def fizz_buzz(input)
+  a, b, m = input.split.collect {|num| num.to_i}
+  out = []
+  1.upto m do |n|
+    alt = ""
+    [[a, 'Fizz'], [b, 'Buzz']].each do |arg|
+      if (n % arg.first).zero?
+        alt += arg.last
+      end
+    end
+    out << if alt.empty?; n else alt end
+  end
+  out.join " "
+end

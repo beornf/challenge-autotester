@@ -1,0 +1,24 @@
+Roman Numerals to Elvish:
+Write a program to print the Elvish equivalent for a number
+given in Roman numerals. The mappings for Elvish Quenya are:
+1 = min, 2 = yuyo, 3 = nelde, 4 = kanta, 5 = lemin,
+6 = enekse, 7 = otso, 8 = tolto, 9 = hue, 10 = kai,
+11 = minqe, 12 = yunqe, 13 = (nel)kea, 14 = (kan)kea,
+15 = (lemin)kea, 16 = (enek)kea, 17 = okkea, 18 = (tol)kea,
+19 = hukea, 20 = (yu)kainen, 30 = (nel)kainen,
+40 = (kan)kainen, 50 = (lemin)kainen, 60 = (enek)kainen,
+70 = (otso)kainen, 80 = (tol)kainen, 90 = (hue)kainen,
+100 = tuksa, 200 = (yu)tuksa, 300 = (nel)tuksa, etc.
+1000 = hume, 2000 = (yu)humi, 3000 = (nel)humi, etc.
+
+Example: Given 527 in Roman numerals
+Input  : DXXVII
+Output : lemintuksa yukainen otso
+
+Example: Given 2648 in Roman numerals
+Input  : MMDCXLVIII
+Output : yuhumi enektuksa kankainen tolto
+
+Example: Given 3917 in Roman numerals
+Input  : MMMCMXVII
+Output : nelhumi huetuksa okkea

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo cp install/challenge-completion.sh /etc/bash_completion.d/challenge
+echo 'Restart shell to enable autocomplete!'

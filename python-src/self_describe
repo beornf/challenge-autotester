@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+
+def self_describe(input):
+    found = []
+    for check in range(1, int(input)+1):
+        number, match = str(check), True
+        for index, char in enumerate(number):
+            if number.count(str(index)) != int(char):
+                match = False
+                break
+        if match:
+            found.append(number)
+    return ' '.join(found)

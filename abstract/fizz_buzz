@@ -1,0 +1,17 @@
+Fizz Buzz:
+Write a program that prints the numbers from 1 to N.
+For multiples of A print "Fizz" instead of the number and
+for multiples of B print "Buzz". For numbers which are
+multiples of both A and B print "FizzBuzz".
+
+Example: Standard fizz buzz game
+Input  : 3 5 13
+Output : 1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13
+
+Example: Divisors six and four up to twelve
+Input  : 6 4 12
+Output : 1 2 3 Buzz 5 Fizz 7 Buzz 9 10 11 FizzBuzz
+
+Example: Alternating fizz and buzz
+Input  : 1 2 7
+Output : Fizz FizzBuzz Fizz FizzBuzz Fizz FizzBuzz Fizz

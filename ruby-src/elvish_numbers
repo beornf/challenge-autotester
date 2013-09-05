@@ -1,0 +1,92 @@
+#!/usr/bin/env ruby
+
+class Elvish
+  def initialize
+    @quenya = {1 => 'min', 2 => 'yu.yo', 3 => 'nel.de', 4 => 'kan.ta',
+               5 => 'lemin', 6 => 'enek.se', 7 => 'otso', 8 => 'tol.to',
+               9 => 'hue', 10 => 'kai/kainen/kea', 11 => 'minqe',
+               12 => 'yunqe', 17 => 'okkea', 19 => 'hukea', 100 => 'tuksa',
+               1000 => 'hume/humi'}
+  end
+
+  def teen(num)
+    if @quenya.include? num.to_i
+      @quenya[num.to_i]
+    else
+      self.prefix(num[1].to_i) + @quenya[10].split(",")[2]
+    end
+  end
+
+  def group(unit)
+    @quenya[10 ** unit].split("/")
+  end
+
+  def prefix(num)
+    @quenya[num].split(".")[0]
+  end
+
+  def unit(num)
+    @quenya[num].delete(".")
+  end
+
+  def plural(unit)
+    group = self.group unit
+    group.size > 1 ? group[1] : group[0]
+  end
+
+  def single(unit)
+    group = self.group unit
+    group[0]
+  end
+end
+
+def elvish_numbers(numeral)
+  roman = {M: 1000, D: 500, C: 100, L: 50, X: 10, V: 5, I: 1}
+  hist = [0, 0]
+  total = 0
+
+  # roman numeral to decimal conversion
+  numeral.split('').each do |letter|
+    cur = roman[letter.to_sym]
+    inc, prev = true, hist.last
+    if not hist.first.zero?
+      diff = cur - hist.first
+      if not diff.zero?
+        total += if diff > 0; diff else hist.inject(:*) end
+        if diff > 0
+          hist, inc = [0, 0], false
+        else
+          prev = 0
+        end
+      end
+    end
+    if inc
+      hist = [cur, prev + 1]
+    end
+  end
+  total += hist.inject(:*)
+
+  # decimal to elvish conversion
+  parser = Elvish.new
+  words, total = [], total.to_s
+  total.split('').each_with_index do |num, index|
+    unit = total.size - index - 1
+    num = num.to_i
+    if not num.zero?
+      if unit > 0
+        if num > 1
+          words << parser.prefix(num) + parser.plural(unit)
+        elsif unit == 1
+          num = total.slice(total.size - 2, 2)
+          words << parser.teen(num)
+          break
+        else
+          words << parser.single(unit)
+        end
+      else
+        words << parser.unit(num)
+      end
+    end
+  end
+  words.join(' ')
+end
